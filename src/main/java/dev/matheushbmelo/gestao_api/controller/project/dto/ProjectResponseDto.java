@@ -1,6 +1,8 @@
 package dev.matheushbmelo.gestao_api.controller.project.dto;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public record ProjectResponseDto(Long id, String name, String description, LocalDateTime startDate) {
+import java.time.LocalDate;
+
+public record ProjectResponseDto(Long id, String name, String description, @JsonFormat(pattern = "dd/MM/yyyy") LocalDate startDate) {
 }
