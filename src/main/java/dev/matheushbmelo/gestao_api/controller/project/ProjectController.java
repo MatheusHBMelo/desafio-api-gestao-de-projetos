@@ -1,0 +1,27 @@
+package dev.matheushbmelo.gestao_api.controller.project;
+
+import dev.matheushbmelo.gestao_api.controller.project.dto.ProjectRequestDto;
+import dev.matheushbmelo.gestao_api.service.project.ProjectService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = "/projects")
+public class ProjectController {
+    private final ProjectService projectService;
+
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> createNewProject(@RequestBody @Valid ProjectRequestDto projectRequestDto) {
+        this.projectService.create(projectRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+}
