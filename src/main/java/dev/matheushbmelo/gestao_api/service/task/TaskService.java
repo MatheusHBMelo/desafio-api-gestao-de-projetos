@@ -48,4 +48,12 @@ public class TaskService {
         task.setStatus(Status.valueOf(statusDto.status()));
         this.taskRepository.save(task);
     }
+
+    public void deleteTask(Long id) {
+        if (this.taskRepository.existsById(id)){
+            this.taskRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Essa task não existe");
+        }
+    }
 }
