@@ -1,5 +1,6 @@
 package dev.matheushbmelo.gestao_api.controller.task;
 
+import dev.matheushbmelo.gestao_api.controller.task.dto.StatusDto;
 import dev.matheushbmelo.gestao_api.controller.task.dto.TaskRequestDto;
 import dev.matheushbmelo.gestao_api.controller.task.dto.TaskResponseDto;
 import dev.matheushbmelo.gestao_api.service.task.TaskService;
@@ -30,5 +31,11 @@ public class TaskController {
                                                              @RequestParam(required = true) String priority,
                                                              @RequestParam(required = true) Long projectId) {
         return ResponseEntity.status(HttpStatus.OK).body(this.taskService.findByFilter(status, priority, projectId));
+    }
+
+    @PutMapping(path = "/{id}/status")
+    public ResponseEntity<Void> updateTask(@PathVariable(value = "id") Long id, @RequestBody StatusDto statusDto){
+        this.taskService.updateStatus(id, statusDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
