@@ -1,5 +1,6 @@
 package dev.matheushbmelo.gestao_api.service.task;
 
+import dev.matheushbmelo.gestao_api.controller.task.dto.StatusDto;
 import dev.matheushbmelo.gestao_api.controller.task.dto.TaskRequestDto;
 import dev.matheushbmelo.gestao_api.controller.task.dto.TaskResponseDto;
 import dev.matheushbmelo.gestao_api.entity.project.ProjectEntity;
@@ -40,5 +41,11 @@ public class TaskService {
         Priority priorityEnum = Priority.valueOf(priority.toUpperCase());
         List<TaskEntity> tasks = this.taskRepository.findByFilters(statusEnum, priorityEnum, projectId);
         return taskMapper.mapToTaskResponseDtoList(tasks);
+    }
+
+    public void updateStatus(Long id, StatusDto statusDto) {
+        TaskEntity task = this.taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Essa task não existe"));
+        task.setStatus(Status.valueOf(statusDto.status()));
+        this.taskRepository.save(task);
     }
 }
