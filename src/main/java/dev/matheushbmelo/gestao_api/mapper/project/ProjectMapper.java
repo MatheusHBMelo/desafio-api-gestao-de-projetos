@@ -15,4 +15,8 @@ public interface ProjectMapper {
     ProjectEntity mapToProject(ProjectRequestDto projectRequestDto);
 
     List<ProjectResponseDto> mapToProjectResponseDtoList(List<ProjectEntity> projects);
+
+    default Long map(ProjectEntity projectEntity) {
+        return projectEntity != null ? projectEntity.getId() : null;
+    }
 }
