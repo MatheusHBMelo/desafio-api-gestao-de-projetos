@@ -6,5 +6,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record TaskRequestDto(@NotBlank String title, String description, Priority priority, LocalDate dueDate, @NotNull Long projectId) {
+public record TaskRequestDto(@NotBlank(message = "O titulo é obrigatorio") String title, String description, Priority priority, LocalDate dueDate, @NotNull(message = "A chave projectId é obrigatoria") Long projectId) {
 }
