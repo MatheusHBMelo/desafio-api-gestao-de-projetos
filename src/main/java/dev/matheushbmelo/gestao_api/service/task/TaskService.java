@@ -10,6 +10,9 @@ import dev.matheushbmelo.gestao_api.entity.task.TaskEntity;
 import dev.matheushbmelo.gestao_api.mapper.task.TaskMapper;
 import dev.matheushbmelo.gestao_api.repository.project.ProjectRepository;
 import dev.matheushbmelo.gestao_api.repository.task.TaskRepository;
+import dev.matheushbmelo.gestao_api.service.exceptions.ProjectNotFoundException;
+import dev.matheushbmelo.gestao_api.service.exceptions.StatusNotFoundException;
+import dev.matheushbmelo.gestao_api.service.exceptions.TaskNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +34,7 @@ public class TaskService {
         TaskEntity newTask = taskMapper.mapToTaskEntity(taskRequestDto);
         newTask.setStatus(Status.TODO);
         ProjectEntity project = this.projectRepository.findById(taskRequestDto.projectId())
-                .orElseThrow(() -> new RuntimeException("Não existe projeto com ID: " + taskRequestDto.projectId()));
+                .orElseThrow(() -> new ProjectNotFoundException("Não existe projeto com ID:" + taskRequestDto.projectId()));
         newTask.setProjectId(project);
         this.taskRepository.save(newTask);
     }
@@ -44,16 +47,25 @@ public class TaskService {
     }
 
     public void updateStatus(Long id, StatusDto statusDto) {
-        TaskEntity task = this.taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Essa task não existe"));
-        task.setStatus(Status.valueOf(statusDto.status()));
-        this.taskRepository.save(task);
+        String statusValue = statusDto.status().toUpperCase();
+
+        TaskEntity task = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException("Não existe tarefa com ID: " + id));
+
+        try {
+            Status newStatus = Status.valueOf(statusValue);
+            task.setStatus(newStatus);
+            taskRepository.save(task);
+        } catch (IllegalArgumentException ex) {
+            throw new StatusNotFoundException("Status inválido: " + statusValue);
+        }
     }
 
     public void deleteTask(Long id) {
-        if (this.taskRepository.existsById(id)){
+        if (this.taskRepository.existsById(id)) {
             this.taskRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Essa task não existe");
+            throw new TaskNotFoundException("Não existe tarefa com ID:" + id);
         }
     }
 }
