@@ -102,12 +102,21 @@ Antes de começar, certifique-se de ter instalado:
 
 ### Executando o Projeto
 
-- Inicie o servidor Spring Boot:
+- Gerar o build da aplicação:
 
 ```bash
-   mvn spring-boot:run
+   mvn clean package
 ```
+
+- Subir os containers (API + Banco de Dados)
+```bash
+   mvn docker compose up --build
+```
+
+- OBS: Não esqueça de configurar o nome do banco de dados, usuario e senha, no application.properties e no docker-compose.
+
 - A aplicação estará disponível em: http://localhost:8080
+- A documentação estaráq disponivel em: http://localhost:8080/swagger-ui/index.html 
 
 
 ## **Commits Semânticos**
