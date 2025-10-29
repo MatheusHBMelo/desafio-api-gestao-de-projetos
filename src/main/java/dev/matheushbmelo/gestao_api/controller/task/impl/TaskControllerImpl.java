@@ -28,9 +28,9 @@ public class TaskControllerImpl implements TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TaskResponseDto>> findByParam(@RequestParam(required = true) String status,
-                                                             @RequestParam(required = true) String priority,
-                                                             @RequestParam(required = true) Long projectId) {
+    public ResponseEntity<List<TaskResponseDto>> findByParam(@RequestParam(name = "status", required = true) String status,
+                                                             @RequestParam(name = "priority", required = true) String priority,
+                                                             @RequestParam(name = "projectId", required = true) Long projectId) {
         return ResponseEntity.status(HttpStatus.OK).body(this.taskService.findByFilter(status, priority, projectId));
     }
 
