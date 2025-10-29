@@ -3,6 +3,7 @@ package dev.matheushbmelo.gestao_api.controller.project;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.matheushbmelo.gestao_api.controller.project.dto.ProjectRequestDto;
 import dev.matheushbmelo.gestao_api.controller.project.dto.ProjectResponseDto;
+import dev.matheushbmelo.gestao_api.controller.project.impl.ProjectControllerImpl;
 import dev.matheushbmelo.gestao_api.service.project.ProjectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(ProjectController.class)
+@WebMvcTest(ProjectControllerImpl.class)
 @AutoConfigureMockMvc(addFilters = false)
 class ProjectControllerTest {
     @Autowired

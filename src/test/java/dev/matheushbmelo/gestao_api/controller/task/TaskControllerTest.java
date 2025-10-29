@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.matheushbmelo.gestao_api.controller.task.dto.StatusDto;
 import dev.matheushbmelo.gestao_api.controller.task.dto.TaskRequestDto;
 import dev.matheushbmelo.gestao_api.controller.task.dto.TaskResponseDto;
+import dev.matheushbmelo.gestao_api.controller.task.impl.TaskControllerImpl;
 import dev.matheushbmelo.gestao_api.entity.task.Priority;
 import dev.matheushbmelo.gestao_api.entity.task.Status;
 import dev.matheushbmelo.gestao_api.service.exceptions.StatusNotFoundException;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(TaskController.class)
+@WebMvcTest(TaskControllerImpl.class)
 @AutoConfigureMockMvc(addFilters = false)
 class TaskControllerTest {
     @Autowired
