@@ -1,4 +1,4 @@
-# **💸 Desafio Gestão API - Sistema de gestão de projetos e tarefas**
+# **Desafio Gestão API - Sistema de gestão de projetos e tarefas**
 
 ## **Descrição do Projeto**
 Esta é uma API Rest para gerenciamento de um sistema de gestão de projetos desenvolvido em **Java** utilizando o **Spring Boot**. A aplicação oferece funcionalidades como criação de projetos e tarefas, busca por parametros, deleção, atualização e documentação com **Swagger UI**.
@@ -89,9 +89,9 @@ Antes de começar, certifique-se de ter instalado:
 -   Atualize as credenciais no arquivo `application.properties`.
 
 ```properties
-   spring.datasource.url=jdbc:postgresql://localhost:5432/springbankdb 
-   spring.datasource.username=seu-usuario 
-   spring.datasource.password=sua-senha
+   spring.datasource.url=jdbc:postgresql://localhost:5432/gestaoapidb 
+   spring.datasource.username=user 
+   spring.datasource.password=senha
 ```
 
 3. Compile o projeto:
@@ -102,12 +102,21 @@ Antes de começar, certifique-se de ter instalado:
 
 ### Executando o Projeto
 
-- Inicie o servidor Spring Boot:
+- Gerar o build da aplicação:
 
 ```bash
-   mvn spring-boot:run
+   mvn clean package
 ```
+
+- Subir os containers (API + Banco de Dados)
+```bash
+   mvn docker compose up --build
+```
+
+- OBS: Não esqueça de configurar o nome do banco de dados, usuario e senha, no application.properties e no docker-compose.
+
 - A aplicação estará disponível em: http://localhost:8080
+- A documentação estaráq disponivel em: http://localhost:8080/swagger-ui/index.html 
 
 
 ## **Commits Semânticos**
