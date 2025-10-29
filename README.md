@@ -1,4 +1,4 @@
-# **💸 Desafio Gestão API - Sistema de gestão de projetos e tarefas**
+# **Desafio Gestão API - Sistema de gestão de projetos e tarefas**
 
 ## **Descrição do Projeto**
 Esta é uma API Rest para gerenciamento de um sistema de gestão de projetos desenvolvido em **Java** utilizando o **Spring Boot**. A aplicação oferece funcionalidades como criação de projetos e tarefas, busca por parametros, deleção, atualização e documentação com **Swagger UI**.
@@ -89,9 +89,9 @@ Antes de começar, certifique-se de ter instalado:
 -   Atualize as credenciais no arquivo `application.properties`.
 
 ```properties
-   spring.datasource.url=jdbc:postgresql://localhost:5432/springbankdb 
-   spring.datasource.username=seu-usuario 
-   spring.datasource.password=sua-senha
+   spring.datasource.url=jdbc:postgresql://localhost:5432/gestaoapidb 
+   spring.datasource.username=user 
+   spring.datasource.password=senha
 ```
 
 3. Compile o projeto:
