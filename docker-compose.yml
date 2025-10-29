@@ -1,0 +1,32 @@
+services:
+  gestao-api:
+    build: .
+    container_name: gestao-api
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/gestaoapidb
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: senha
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:15
+    container_name: gestao-db
+    environment:
+      POSTGRES_DB: gestaoapidb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: senha
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+volumes:
+  pg_data:
